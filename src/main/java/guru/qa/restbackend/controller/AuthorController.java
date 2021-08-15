@@ -45,9 +45,11 @@ public class AuthorController {
                 .build();
     }
 
-    @GetMapping("authors/getById/{id}/")
-    @ApiOperation("Получить автора по id")
+
+    @GetMapping("authors/withId/{id}")
+    @ApiOperation("Get author by id")
     public List<Author> getAuthorById(@PathVariable("id") Integer id) {
+
         if (authors.containsKey(id)) {
             return authors.entrySet()
                     .stream()

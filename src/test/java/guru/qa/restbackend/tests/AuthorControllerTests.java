@@ -63,4 +63,17 @@ public class AuthorControllerTests {
 
         assertEquals(before.length + 1, after.length);
     }
+
+    @Test
+    void getAuthorById() {
+        Specs.authorsRequestSpec
+                .given()
+                .when()
+                .get("/withId/2")
+                .then()
+                .statusCode(200)
+                .log().body()
+                .body("author_id[0]", is(2),
+                        "author_name[0]", is("Роулинг"));
+    }
 }
