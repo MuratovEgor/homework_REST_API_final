@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.toList;
 
 @RestController
 public class AuthorController {
-    private Map<Integer, Author> authors = new HashMap<>(Map.of(
+    private final Map<Integer, Author> authors = new HashMap<>(Map.of(
             1, Author.builder()
                     .authorId(1)
                     .authorName("Толкин")
@@ -47,7 +47,7 @@ public class AuthorController {
 
 
     @GetMapping("authors/withId/{id}")
-    @ApiOperation("Get author by id")
+    @ApiOperation("Получить автора по id")
     public List<Author> getAuthorById(@PathVariable("id") Integer id) {
 
         if (authors.containsKey(id)) {
@@ -55,10 +55,9 @@ public class AuthorController {
                     .stream()
                     .map(Map.Entry::getValue)
                     .filter(author -> author.getAuthorId() == id)
-                    .collect(toList());}
-        else throw new AuthorNotFoundException(HttpStatus.NOT_FOUND);
+                    .collect(toList());
+        } else throw new AuthorNotFoundException(HttpStatus.NOT_FOUND);
     }
-
 
 
 }

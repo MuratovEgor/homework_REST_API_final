@@ -2,7 +2,6 @@ package guru.qa.restbackend.tests;
 
 import guru.qa.restbackend.domain.Author;
 import guru.qa.restbackend.specs.Specs;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.is;

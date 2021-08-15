@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
 @RestController
 public class BookController {
-    private Map<Integer, Book> books = new HashMap<>(Map.of(
+    private final Map<Integer, Book> books = new HashMap<>(Map.of(
             1, Book.builder()
                     .bookId(1)
                     .bookName("Властелин колец")
@@ -57,26 +56,24 @@ public class BookController {
     @GetMapping("books/withId/{id}")
     @ApiOperation("Получить книгу по id")
     public List<Book> getBookById(@PathVariable("id") Integer id) {
-        if (books.containsKey(id)){
+        if (books.containsKey(id)) {
             return books.entrySet()
                     .stream()
                     .map(Map.Entry::getValue)
                     .filter(book -> book.getBookId() == id)
                     .collect(toList());
-        }
-        else throw new BookNotFoundException(HttpStatus.NOT_FOUND);
+        } else throw new BookNotFoundException(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("books/authorId/{id}")
     @ApiOperation("Получить книгу по id автора")
     public List<Book> getBooksByAuthorId(@PathVariable("id") Integer id) {
-        if (books.containsKey(id)){
+        if (books.containsKey(id)) {
             return books.entrySet()
                     .stream()
                     .map(Map.Entry::getValue)
                     .filter(book -> book.getAuthorId() == id)
                     .collect(toList());
-        }
-        else throw new BookNotFoundException(HttpStatus.NOT_FOUND);
+        } else throw new BookNotFoundException(HttpStatus.NOT_FOUND);
     }
 }
