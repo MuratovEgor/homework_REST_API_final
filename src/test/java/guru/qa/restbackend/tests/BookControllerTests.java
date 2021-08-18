@@ -92,16 +92,16 @@ public class BookControllerTests {
     @Test
     void getBooksByAuthorId() {
 
-        Integer authorId = 1,
-                booksCount = 2;
+        Integer authorId = 2,
+                booksCount = 1;
 
         Book[] books = Specs.booksRequestSpec
                 .given()
                 .when()
-                .get("/withAuthorId/" + authorId)
+                .get("/authorId/" + authorId)
                 .then()
-                .statusCode(200)
                 .log().body()
+                .statusCode(200)
                 .extract().response().as(Book[].class);
 
         assertEquals(booksCount, books.length);
